@@ -1,0 +1,53 @@
+{
+  "navigation": {
+    "home": "Home",
+    "services": "Services",
+    "portfolio": "Our Portfolio",
+    "why_choose": "Why Collabez",
+    "reviews": "Reviews",
+    "process": "Our Process",
+    "contact": "Contact Us",
+    "get_quote": "Get a Quote"
+  },
+  "hero": {
+    "title": "Explore Your Possibilities",
+    "subtitles": "[\"From Concept to Code,\", \"Transforming Ideas into\"]",
+    "rotatingWords": "[\"Websites\", \"Mobile Apps\", \"Custom Software\", \"Ecommerce Solutions\"]"
+  },
+  "techSlider": {
+    "heading": "Technologies We Work With",
+    "description": "We leverage the latest technologies and frameworks to build high-performing, scalable, and secure digital solutions"
+  },
+  "services": {
+    "title": "Explore Our Services",
+    "description": "From websites to mobile apps and e-commerce solutions, we offer tailored digital services to help your business thrive!",
+    "button": "Get Started",
+    "startWithUs": "Start With Us"
+  },
+  "serviceItems": [
+    {
+      "title": "Custom Web Development",
+      "description": "Building fast, secure, and scalable websites tailored to your business needs, focusing on performance and reliability."
+    },
+    {
+      "title": "UI/UX Design",
+      "description": "Creating user-friendly interfaces that enhance engagement and ensure a seamless experience across all devices."
+    },
+    {
+      "title": "Web Applications",
+      "description": "Developing robust and interactive web applications that provide enhanced functionalities."
+    },
+    {
+      "title": "iOS & Android Apps",
+      "description": "Native and cross-platform mobile applications designed for performance, user experience, and engagement."
+    },
+    {
+      "title": "DevOps & Integrations",
+      "description": "Streamlining development workflows and integrating third-party services for seamless performance."
+    },
+    {
+      "title": "E-commerce Solutions",
+      "description": "From custom stores to Shopify and WooCommerce, we build e-commerce platforms."
+    }
+  ]
+}

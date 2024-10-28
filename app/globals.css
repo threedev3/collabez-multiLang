@@ -1,0 +1,225 @@
+@font-face {
+  font-family: "satoshi";
+  src: url("/public/fonts/Satoshi-Regular.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "satoshi-bold";
+  src: url("/public/fonts/Satoshi-Bold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "outfit";
+  src: url("/public/fonts/Outfit-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+}
+html {
+  scroll-behavior: smooth;
+}
+
+.font-satoshi {
+  font-family: "satoshi";
+}
+
+.font-satoshi-bold {
+  font-family: "satoshi-bold";
+}
+@keyframes moveBorder {
+  0% {
+    border-image-source: linear-gradient(90deg, #5b3ccc90, #000000);
+  }
+  25% {
+    border-image-source: linear-gradient(180deg, #5b3ccc90, #000000);
+  }
+  50% {
+    border-image-source: linear-gradient(270deg, #5b3ccc90, #000000);
+  }
+  75% {
+    border-image-source: linear-gradient(360deg, #5b3ccc90, #000000);
+  }
+  100% {
+    border-image-source: linear-gradient(90deg, #5b3ccc90, #000000);
+  }
+}
+
+.serviceBorder {
+  position: relative;
+  z-index: 1;
+}
+
+.serviceBorder::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 3px solid transparent;
+  border-image: linear-gradient(90deg, #5b3ccc90, transparent) 1;
+  animation: moveBorder 6s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+@keyframes marquee-ltr {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes marquee-rtl {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-marquee-ltr {
+  animation: marquee-ltr 25s linear infinite;
+}
+
+.animate-marquee-rtl {
+  animation: marquee-rtl 40s linear infinite;
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: 50%;
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  padding: 2px;
+  background: linear-gradient(90deg, #bf8f28, #000000);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: destination-out;
+  mask-composite: exclude;
+  animation: rotateBorder 4s linear infinite;
+}
+
+@keyframes rotateBorder {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.review-border {
+  position: relative;
+  z-index: 1;
+}
+
+.review-border::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px solid transparent;
+  border-image: linear-gradient(90deg, #ffffff80, transparent) 1;
+  animation: moveReviewBorder 4s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes moveReviewBorder {
+  0% {
+    border-image-source: linear-gradient(90deg, #ffffff80, transparent);
+  }
+  25% {
+    border-image-source: linear-gradient(180deg, #ffffff80, transparent);
+  }
+  50% {
+    border-image-source: linear-gradient(270deg, #ffffff80, transparent);
+  }
+  75% {
+    border-image-source: linear-gradient(360deg, #ffffff80, transparent);
+  }
+  100% {
+    border-image-source: linear-gradient(90deg, #ffffff80, transparent);
+  }
+}
+
+.react-international-phone-country-selector-button,
+.react-international-phone-input-container .react-international-phone-input {
+  border: none !important;
+  background-color: transparent !important;
+  color: #ffffff !important;
+  width: 100%;
+}
+
+.react-international-phone-country-selector-button:hover {
+  background-color: #383838 !important;
+  border-radius: 5px !important;
+}
+
+.react-international-phone-input-container
+  .react-international-phone-input::placeholder {
+  color: rgba(255, 255, 255, 0.6) !important;
+  font-size: 16px !important;
+}
+
+.react-international-phone-input-container:focus {
+  outline: none;
+  box-shadow: none;
+  width: "100%";
+}
+
+.react-international-phone-country-selector-dropdown {
+  background-color: #383838 !important;
+  color: #ffffff !important;
+}
+.react-international-phone-country-selector-dropdown::-webkit-scrollbar {
+  width: 6px;
+}
+
+.react-international-phone-country-selector-dropdown::-webkit-scrollbar-track {
+  background: #272727;
+  border-radius: 6px;
+  margin-right: 0;
+}
+
+.react-international-phone-country-selector-dropdown::-webkit-scrollbar-thumb {
+  background: #888888;
+  border-radius: 6px;
+}
+
+.react-international-phone-country-selector-dropdown::-webkit-scrollbar-thumb:hover {
+  background: #555555;
+}
+.react-international-phone-country-selector-dropdown__list-item-country-name {
+  font-size: 16px !important;
+}
+
+.react-international-phone-country-selector-dropdown__list-item:hover {
+  background-color: #2b2b2b !important;
+}
+.react-international-phone-country-selector-dropdown__list-item--focused {
+  background-color: rgb(0 0 0 / 0.6) !important;
+  color: #ffffff !important;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
