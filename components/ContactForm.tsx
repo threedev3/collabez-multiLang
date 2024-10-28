@@ -7,8 +7,9 @@ import emailjs from "@emailjs/browser";
 import toast from "react-hot-toast";
 import dynamic from "next/dynamic";
 import { ActionMeta, SingleValue, StylesConfig } from "react-select";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import countryList from "react-select-country-list";
+import { useTranslations } from "next-intl";
 
 const Select = dynamic(() => import("react-select"), { ssr: false });
 
@@ -44,6 +45,10 @@ interface FormErrors {
 const ContactForm = () => {
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const t = useTranslations("contact");
+  const pathname = usePathname();
+  const locale = pathname.split("/")[1];
 
   const [formData, setFormData] = useState<FormData>({
     fullName: "",
@@ -110,27 +115,37 @@ const ContactForm = () => {
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     if (!formData.fullName) {
-      formErrors.fullName = "Full Name is required.";
+      formErrors.fullName = t("errors.required", {
+        field: t("labels.fullName"),
+      });
     }
 
     if (!formData.email) {
-      formErrors.email = "Email is required.";
+      formErrors.email = t("errors.required", {
+        field: t("labels.email"),
+      });
     } else if (!emailPattern.test(formData.email)) {
       formErrors.email = "Please enter a valid email address.";
     }
 
     if (!formData.phone || !isValid) {
-      formErrors.phone = "Please enter a valid phone number.";
+      formErrors.phone = t("errors.invalidPhone");
     }
     if (!formData.city) {
-      formErrors.city = "Please enter City.";
+      formErrors.city = t("errors.required", {
+        field: t("labels.city"),
+      });
     }
     if (!formData.country) {
-      formErrors.country = "Please enter Country.";
+      formErrors.country = t("errors.required", {
+        field: t("labels.country"),
+      });
     }
 
     if (!formData.projectType) {
-      formErrors.projectType = "Project Type is required.";
+      formErrors.projectType = t("errors.required", {
+        field: t("labels.projectType"),
+      });
     }
 
     setErrors(formErrors);
@@ -199,29 +214,62 @@ const ContactForm = () => {
   };
 
   const projectTypeOptions: OptionType[] = [
-    { value: "Website Development", label: "Website Development" },
-    { value: "Mobile App Development", label: "Mobile App Development" },
-    { value: "E-commerce Solutions", label: "E-commerce Solutions" },
-    { value: "UI/UX Design", label: "UI/UX Design" },
     {
-      value: "Custom Software Development",
-      label: "Custom Software Development",
+      value: t("projectTypeOptions.0.value"),
+      label: t("projectTypeOptions.0.label"),
     },
-    { value: "Game Development", label: "Game Development" },
+    {
+      value: t("projectTypeOptions.1.value"),
+      label: t("projectTypeOptions.1.label"),
+    },
+    {
+      value: t("projectTypeOptions.2.value"),
+      label: t("projectTypeOptions.2.label"),
+    },
+    {
+      value: t("projectTypeOptions.3.value"),
+      label: t("projectTypeOptions.3.label"),
+    },
+    {
+      value: t("projectTypeOptions.4.value"),
+      label: t("projectTypeOptions.4.label"),
+    },
+    {
+      value: t("projectTypeOptions.5.value"),
+      label: t("projectTypeOptions.5.label"),
+    },
   ];
   const projectBudgetOptions: OptionType[] = [
-    { value: "$1,000–$5,000", label: "$1,000–$5,000" },
-    { value: "$5,000–$10,000", label: "$5,000–$10,000" },
-    { value: "$10,000–$25,000", label: "$10,000–$25,000" },
-    { value: "$25,000+", label: "$25,000+" },
+    {
+      value: t("projectBudgetOptions.0.value"),
+      label: t("projectBudgetOptions.0.label"),
+    },
+    {
+      value: t("projectBudgetOptions.1.value"),
+      label: t("projectBudgetOptions.1.label"),
+    },
+    {
+      value: t("projectBudgetOptions.2.value"),
+      label: t("projectBudgetOptions.2.label"),
+    },
+    {
+      value: t("projectBudgetOptions.3.value"),
+      label: t("projectBudgetOptions.3.label"),
+    },
   ];
   const projectTimelineOptions: OptionType[] = [
     {
-      value: "We’re Ready to Start Immediately",
-      label: "We’re Ready to Start Immediately",
+      value: t("projectTimelineOptions.0.value"),
+      label: t("projectTimelineOptions.0.label"),
     },
-    { value: "Within 1-3 Months", label: "Within 1-3 Months" },
-    { value: "Within 3-6 Months", label: "Within 3-6 Months" },
+    {
+      value: t("projectTimelineOptions.1.value"),
+      label: t("projectTimelineOptions.1.label"),
+    },
+    {
+      value: t("projectTimelineOptions.2.value"),
+      label: t("projectTimelineOptions.2.label"),
+    },
   ];
 
   const customStyles: StylesConfig<unknown, boolean> = {
@@ -314,15 +362,23 @@ const ContactForm = () => {
       <div className="max-w-[93%] w-full mx-auto flex flex-col xl:gap-8 lg:gap-6 gap-6 items-start justify-center h-full ">
         <div className="flex  min-[806px]:gap-6 gap-0 items-start justify-between w-full ">
           <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-heroColor via-white to-heroColor max-w-full min-[1525px]:text-[75px] min-[1420px]:text-[70px]  min-[1260px]:text-[60px] min-[1071px]:text-[50px] min-[976px]:text-[45px] min-[899px]:text-[40px] sm:text-[40px] text-[28px] min-[375px]:text-[32px] min-[414px]:text-[32px] leading-snug font-[family-name:var(--font-satoshi)] text-center mx-auto ">
-            Let&apos;s Discuss Your Ideas
+            {t("title")}
           </h3>
         </div>
 
         <div className="bg-gradient-to-r from-[#854CFF10] via-contactFormBg to-contactFormBg  w-full rounded-xl relative z-10 md:py-10 py-5 md:px-10 px-5 grid lg:grid-cols-1 grid-cols-1 gap-4">
           <div className="flex flex-col gap-4 h-full justify-start w-full">
-            <div className="flex flex-col gap-1 mb-6">
-              <p className="font-[family-name:var(--font-satoshi)] text-white/80 min-[540px]:text-lg text-base max-w-[410px]">
-                Share your project details and let&apos;s get started.
+            <div
+              className={`flex flex-col ${
+                locale === "ar" ? "items-end" : "items-start"
+              } gap-1 mb-6 w-full`}
+            >
+              <p
+                className={`font-[family-name:var(--font-satoshi)] text-white/80 min-[540px]:text-lg text-base max-w-[410px] ${
+                  locale === "ar" ? "text-right" : "text-left"
+                }`}
+              >
+                {t("description")}
               </p>
             </div>
 
@@ -336,17 +392,27 @@ const ContactForm = () => {
               }}
             >
               <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
-                <div className="flex flex-col gap-2 w-full">
+                <div
+                  className={`flex flex-col gap-2 w-full ${
+                    locale === "ar" ? "order-2" : ""
+                  }`}
+                >
                   <input
                     type="text"
                     name="fullName"
-                    placeholder="Full Name"
+                    placeholder={t("labels.fullName")}
                     value={formData.fullName}
                     onChange={handleInputChange}
-                    className="w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none "
+                    className={`w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none ${
+                      locale === "ar" ? "text-right" : "text-left"
+                    }`}
                   />
                   {errors.fullName && (
-                    <span className="text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm">
+                    <span
+                      className={`text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm ${
+                        locale === "ar" ? "text-right" : "text-left"
+                      }`}
+                    >
                       {errors.fullName}
                     </span>
                   )}
@@ -355,30 +421,46 @@ const ContactForm = () => {
                   <input
                     type="email"
                     name="email"
-                    placeholder="Email"
+                    placeholder={t("labels.email")}
                     value={formData.email}
                     onChange={handleInputChange}
-                    className="w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none "
+                    className={`w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none ${
+                      locale === "ar" ? "text-right" : "text-left"
+                    }`}
                   />
                   {errors.email && (
-                    <span className="text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm">
+                    <span
+                      className={`text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm ${
+                        locale === "ar" ? "text-right" : "text-left"
+                      }`}
+                    >
                       {errors.email}
                     </span>
                   )}
                 </div>
               </div>
               <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
-                <div className="flex flex-col gap-2 w-full">
+                <div
+                  className={`flex flex-col gap-2 w-full ${
+                    locale === "ar" ? "order-2 text-right" : "text-left"
+                  }`}
+                >
                   <PhoneInput
                     defaultCountry="pk"
                     name="phone"
                     value={formData.phone}
                     onChange={handlePhoneChange}
-                    placeholder="Phone number"
-                    className="w-full font-[family-name:var(--font-satoshi)] py-1.5 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none"
+                    placeholder={t("labels.phone")}
+                    className={`w-full font-[family-name:var(--font-satoshi)] py-1.5 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none ${
+                      locale === "ar" ? "text-right" : "text-left"
+                    }`}
                   />
                   {errors.phone && (
-                    <span className="text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm">
+                    <span
+                      className={`text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm ${
+                        locale === "ar" ? "text-right" : "text-left"
+                      }`}
+                    >
                       {errors.phone}
                     </span>
                   )}
@@ -388,27 +470,39 @@ const ContactForm = () => {
                   <input
                     type="text"
                     name="city"
-                    placeholder="City"
+                    placeholder={t("labels.city")}
                     value={formData.city}
                     onChange={handleInputChange}
-                    className="w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none "
+                    className={`w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none ${
+                      locale === "ar" ? "text-right" : "text-left"
+                    }`}
                   />
                   {errors.city && (
-                    <span className="text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm">
+                    <span
+                      className={`text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm ${
+                        locale === "ar" ? "text-right" : "text-left"
+                      }`}
+                    >
                       {errors.city}
                     </span>
                   )}
                 </div>
               </div>
               <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
-                <div className="flex flex-col gap-2 w-full">
+                <div
+                  className={`flex flex-col gap-2 w-full ${
+                    locale === "ar" ? "order-2" : ""
+                  }`}
+                >
                   <input
                     type="text"
                     name="country"
-                    placeholder="Country"
+                    placeholder={t("labels.country")}
                     value={formData.country}
                     onChange={handleInputChange}
-                    className="w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none "
+                    className={`w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none ${
+                      locale === "ar" ? "text-right" : "text-left"
+                    }`}
                   />
                   {/* <Select
                     name="country"
@@ -421,7 +515,11 @@ const ContactForm = () => {
                     styles={customStyles}
                   /> */}
                   {errors.country && (
-                    <span className="text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm">
+                    <span
+                      className={`text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm ${
+                        locale === "ar" ? "text-right" : "text-left"
+                      }`}
+                    >
                       {errors.country}
                     </span>
                   )}
@@ -430,29 +528,41 @@ const ContactForm = () => {
                   <input
                     type="text"
                     name="company"
-                    placeholder="Company Name"
+                    placeholder={t("labels.company")}
                     value={formData.company}
                     onChange={handleInputChange}
-                    className="w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none "
+                    className={`w-full font-[family-name:var(--font-satoshi)] py-3 px-6 rounded-lg bg-white/5 border-2 border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-0 focus:ring-none ${
+                      locale === "ar" ? "text-right" : "text-left"
+                    }`}
                   />
                 </div>
               </div>
 
               <div className="grid md:grid-cols-2 grid-cols-1 gap-3">
-                <div className="flex flex-col gap-2 w-full">
+                <div
+                  className={`flex flex-col gap-2 w-full ${
+                    locale === "ar" ? "order-2" : ""
+                  }`}
+                >
                   <Select
                     id="projectType-select"
                     name="projectType"
                     options={projectTypeOptions}
-                    placeholder="Project Type"
+                    placeholder={t("labels.projectType")}
                     value={formData.projectType}
                     styles={customStyles}
                     onChange={handleSelectChange}
-                    className="w-full font-[family-name:var(--font-satoshi)]"
+                    className={`w-full font-[family-name:var(--font-satoshi)] ${
+                      locale === "ar" ? "text-right" : "text-left"
+                    }`}
                     classNamePrefix="react-select"
                   />
                   {errors.projectType && (
-                    <span className="text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm">
+                    <span
+                      className={`text-red-500 font-[family-name:var(--font-satoshi)] lg:text-base text-sm ${
+                        locale === "ar" ? "text-right" : "text-left"
+                      }`}
+                    >
                       {errors.projectType}
                     </span>
                   )}
@@ -462,11 +572,13 @@ const ContactForm = () => {
                     id="projectBudget-select"
                     name="projectBudget"
                     options={projectBudgetOptions}
-                    placeholder="Project Budget"
+                    placeholder={t("labels.projectBudget")}
                     value={formData.projectBudget}
                     styles={customStyles}
                     onChange={handleSelectChange}
-                    className="w-full font-[family-name:var(--font-satoshi)]"
+                    className={`w-full font-[family-name:var(--font-satoshi)] ${
+                      locale === "ar" ? "text-right" : "text-left"
+                    }`}
                     classNamePrefix="react-select"
                   />
                 </div>
@@ -476,11 +588,13 @@ const ContactForm = () => {
                   id="projectTimeline-select"
                   name="projectTimeline"
                   options={projectTimelineOptions}
-                  placeholder="Project Timeline"
+                  placeholder={t("labels.projectTimeline")}
                   value={formData.projectTimeline}
                   styles={customStyles}
                   onChange={handleSelectChange}
-                  className="w-full font-[family-name:var(--font-satoshi)]"
+                  className={`w-full font-[family-name:var(--font-satoshi)] ${
+                    locale === "ar" ? "text-right" : "text-left"
+                  }`}
                   classNamePrefix="react-select"
                 />
               </div>
@@ -490,7 +604,7 @@ const ContactForm = () => {
                   type="submit"
                   className="bg-gradient-to-r from-[#763AF5] to-[#A604F2] w-full py-3 px-6 rounded-lg font-[family-name:var(--font-satoshi-bold)] md:text-lg text-base font-bold "
                 >
-                  {isSubmitting ? "Submitting..." : "Submit"}
+                  {isSubmitting ? t("submitting") : t("submit")}
                 </button>
               </div>
             </form>

@@ -1,10 +1,12 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { motion } from "framer-motion";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useInView } from "react-intersection-observer";
+import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
 interface ProcessStepType {
   number: string;
@@ -19,6 +21,10 @@ const Process = () => {
     threshold: 0.4,
     triggerOnce: true,
   });
+
+  const t = useTranslations("process");
+  const pathname = usePathname();
+  const locale = pathname.split("/")[1];
 
   useEffect(() => {
     const handleResize = () => {
@@ -49,44 +55,15 @@ const Process = () => {
     cssEase: "linear",
   };
 
-  const processSteps: ProcessStepType[] = [
-    {
-      number: "01",
-      title: "Discovery",
-      description:
-        "We start with a detailed discussion to understand your needs, goals, and vision.",
-    },
-    {
-      number: "02",
-      title: "Research & Planning",
-      description:
-        "Our team conducts thorough research and creates a comprehensive project plan.",
-    },
-    {
-      number: "03",
-      title: "Design",
-      description:
-        "We create intuitive and visually appealing designs tailored to your brand.",
-    },
-    {
-      number: "04",
-      title: "Development",
-      description:
-        "Our skilled developers bring the designs to life with clean, efficient code.",
-    },
-    {
-      number: "05",
-      title: "Testing & Refinement",
-      description:
-        "Rigorous testing ensures a bug-free, high-performance final product.",
-    },
-    {
-      number: "06",
-      title: "Launch & Support",
-      description:
-        "We assist with deployment and provide ongoing support to ensure your success.",
-    },
-  ];
+  const processSteps: ProcessStepType[] = useMemo(
+    () =>
+      Array.from({ length: 6 }, (_, i) => ({
+        number: t(`steps.${i}.number`),
+        title: t(`steps.${i}.title`),
+        description: t(`steps.${i}.description`),
+      })),
+    [t]
+  );
 
   const ProcessStep = ({
     step,
@@ -203,7 +180,7 @@ const Process = () => {
       <div className="max-w-[93%] w-full mx-auto flex flex-col xl:gap-8 lg:gap-6 gap-6 items-start justify-center h-full">
         <div className="flex  min-[806px]:gap-6 gap-0 items-start justify-between w-full">
           <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-heroColor via-white to-heroColor max-w-full min-[1525px]:text-[75px] min-[1420px]:text-[70px]  min-[1260px]:text-[60px] min-[1071px]:text-[50px] min-[976px]:text-[45px] min-[899px]:text-[40px] sm:text-[40px] text-[28px] min-[375px]:text-[32px] min-[414px]:text-[32px] leading-snug font-[family-name:var(--font-satoshi)] text-center mx-auto">
-            From Concepts To Launch
+            {t("header")}
           </h3>
         </div>
 

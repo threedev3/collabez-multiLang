@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { ChangeEvent } from "react";
 import { FloatingNav } from "./ui/FloatingNavbar";
 // import { navItems } from "@/data";
 import { FaBars } from "react-icons/fa6";
@@ -9,7 +9,10 @@ import Image from "next/image";
 import MagicButton from "./MagicButton";
 import { scrollToSection } from "@/lib/scrollToSection";
 import { useTranslations } from "next-intl";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
+import { useLocale } from "@/context/LocaleContext";
+import LanguageDropdown from "./LanguageDropdown";
+import { FaGlobe } from "react-icons/fa";
 // import { useRouter } from "next/navigation";
 
 interface NavbarProps {
@@ -20,6 +23,7 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
   const t = useTranslations("navigation");
   const pathname = usePathname();
+  const router = useRouter();
   const locale = pathname.split("/")[1];
   // const router = useRouter();
   // const { locale } = router;
@@ -67,6 +71,15 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
     { id: "process", name: t("process") },
     { id: "contact", name: t("contact") },
   ];
+
+  const localeLang = useLocale();
+
+  const handleLanguageChange = (e: ChangeEvent<HTMLSelectElement>) => {
+    const newLocale = e.target.value as string;
+    const path = pathname.split("/").slice(2).join("/");
+    router.push(`/${newLocale}/${path}`);
+  };
+
   return (
     <header
       className={`flex ${
@@ -112,7 +125,11 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
           <FloatingNav navItems={navItems} />
         </div>
 
-        <div className="lg:flex lg:items-center xl:gap-6 gap-4 hidden">
+        <div
+          className={`lg:flex ${
+            locale === "ar" ? "lg:flex-row-reverse" : "lg:flex-row"
+          } lg:items-center xl:gap-6 gap-4 hidden`}
+        >
           <a className="relative z-20 cursor-pointer">
             <MagicButton
               title={t("get_quote")}
@@ -121,26 +138,71 @@ const Navbar: React.FC<NavbarProps> = ({ isMenuOpen, setIsMenuOpen }) => {
               handleClick={() => scrollToSection("contact")}
             />
           </a>
+          <div className="flex gap-1 items-center">
+            <FaGlobe className="text-white w-5 h-5" aria-hidden="true" />
+            <select
+              value={localeLang}
+              onChange={handleLanguageChange}
+              className="bg-transparent appearance-none text-white font-medium outline-none cursor-pointer bg-black"
+            >
+              <option
+                value="en"
+                className="text-white cursor-pointer bg-blackBg p-3"
+              >
+                English
+              </option>
+              <option value="ar" className="text-white bg-blackBg p-3">
+                Arabic
+              </option>
+            </select>
+          </div>
+
+          {/* <LanguageDropdown /> */}
         </div>
 
         <div
-          className="lg:hidden block w-10 h-8 cursor-pointer z-[11000] relative"
-          onClick={toggleMenu}
+          className={`flex lg:hidden ${
+            locale === "ar" ? "flex-row-reverse" : "flex-row"
+          } gap-6`}
         >
-          <FaBars
-            className={`h-8 w-8 text-white absolute inset-0 transition-all duration-300 ease-in-out ${
-              isMenuOpen
-                ? "opacity-0 rotate-90 scale-50"
-                : "opacity-100 rotate-0 scale-100"
-            }`}
-          />
-          <IoCloseSharp
-            className={`h-8 w-8 text-white absolute inset-0 transition-all duration-300 ease-in-out ${
-              isMenuOpen
-                ? "opacity-100 rotate-0 scale-100"
-                : "opacity-0 rotate-90 scale-50"
-            }`}
-          />
+          <div className="flex gap-1 items-center ">
+            <FaGlobe className="text-white w-5 h-5" aria-hidden="true" />
+            <select
+              value={localeLang}
+              onChange={handleLanguageChange}
+              className="bg-transparent appearance-none text-white font-medium outline-none cursor-pointer bg-black"
+            >
+              <option
+                value="en"
+                className="text-white cursor-pointer bg-blackBg p-3"
+              >
+                English
+              </option>
+              <option value="ar" className="text-white bg-blackBg p-3">
+                Arabic
+              </option>
+            </select>
+          </div>
+
+          <div
+            className="lg:hidden block w-10 h-8 cursor-pointer z-[11000] relative"
+            onClick={toggleMenu}
+          >
+            <FaBars
+              className={`h-8 w-8 text-white absolute inset-0 transition-all duration-300 ease-in-out ${
+                isMenuOpen
+                  ? "opacity-0 rotate-90 scale-50"
+                  : "opacity-100 rotate-0 scale-100"
+              }`}
+            />
+            <IoCloseSharp
+              className={`h-8 w-8 text-white absolute inset-0 transition-all duration-300 ease-in-out ${
+                isMenuOpen
+                  ? "opacity-100 rotate-0 scale-100"
+                  : "opacity-0 rotate-90 scale-50"
+              }`}
+            />
+          </div>
         </div>
       </div>
 

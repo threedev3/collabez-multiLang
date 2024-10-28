@@ -6,6 +6,7 @@ import { getMessages } from "next-intl/server";
 import "../globals.css";
 import { ThemeProvider } from "../provider";
 import Image from "next/image";
+import { LocaleProvider } from "@/context/LocaleContext";
 
 export const metadata: Metadata = {
   title: "CollabEZ- Let's Create Extraordinary",
@@ -128,16 +129,18 @@ export default async function RootLayout({
         )}
       </head>
       <body className={`${satoshiRegular.variable} ${satoshiBold.variable}`}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
-          <NextIntlClientProvider messages={messages}>
-            {children}
-          </NextIntlClientProvider>
-        </ThemeProvider>
+        <LocaleProvider locale={locale}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="dark"
+            enableSystem
+            disableTransitionOnChange
+          >
+            <NextIntlClientProvider locale={locale} messages={messages}>
+              {children}
+            </NextIntlClientProvider>
+          </ThemeProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

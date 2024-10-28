@@ -21,7 +21,7 @@
   "services": {
     "title": "Explore Our Services",
     "description": "From websites to mobile apps and e-commerce solutions, we offer tailored digital services to help your business thrive!",
-    "button": "Get Started",
+    "startButton": "Get Started",
     "startWithUs": "Start With Us"
   },
   "serviceItems": [
@@ -49,5 +49,205 @@
       "title": "E-commerce Solutions",
       "description": "From custom stores to Shopify and WooCommerce, we build e-commerce platforms."
     }
-  ]
+  ],
+
+  "choose": {
+    "title": "Here’s Why We’re Different",
+    "description": "Discover the unique reasons to partner with us.",
+    "chooseItems": [
+      {
+        "1": "01",
+        "title": "On-Time Delivery",
+        "description": "We understand the importance of deadlines. Our agile team ensures your project is delivered when promised."
+      },
+      {
+        "2": "02",
+        "title": "Long Term Partnership",
+        "description": "We're not just service providers; we're your dedicated tech allies, committed to your long-term success."
+      },
+      {
+        "3": "03",
+        "title": "Diverse Expertise",
+        "description": "From websites to complex apps, our versatile team has the skills to bring any digital vision to life."
+      },
+      {
+        "4": "04",
+        "title": "Tailored Solutions",
+        "description": "We don't believe in one-size-fits-all. Each solution is customized to meet your unique business needs."
+      },
+      {
+        "5": "05",
+        "title": "Quality & Expertise",
+        "description": "With a track record of delivering high-quality websites, apps, and e-commerce platforms, we ensure every project meets the highest standards."
+      },
+      {
+        "6": "06",
+        "title": "Transparent Pricing",
+        "description": "Our pricing is fair, transparent, and designed to fit your budget while ensuring you get the quality you deserve."
+      }
+    ],
+    "footer": {
+      "title": "Ready to Get Started?",
+      "footerButton": "Get a Free Consultation",
+      "description": "Let’s Build Something Great Together! Whether you need a website, app, or custom solution, we’re ready to help you succeed."
+    }
+  },
+
+  "portfolio": {
+    "successStories": "Success Stories",
+    "items": [
+      {
+        "title": "World On Board",
+        "category": "Web Development"
+      },
+      {
+        "title": "Stellar Online School",
+        "category": "Web Development"
+      },
+      {
+        "title": "CollabDash",
+        "category": "Web & App Development"
+      },
+      {
+        "title": "Tuition Highway",
+        "category": "App Development"
+      }
+    ]
+  },
+
+  "reviews": {
+    "clientReviews": "Client Reviews",
+    "reviewItems": [
+      {
+        "name": "Ahmed M.",
+        "tagLine": "Dubai",
+        "review": "CollabEZ exceeded our expectations with exceptional web development. The site looks amazing and works flawlessly. The entire process was seamless. We highly recommend their team for any project!"
+      },
+      {
+        "name": "Fatima S.",
+        "tagLine": "Abu Dhabi",
+        "review": "Working with CollabEZ was a seamless experience. Their team understood our needs perfectly and delivered a website that not only looks great but also performs exceptionally well. Highly recommended!"
+      },
+      {
+        "name": "Khalid A.",
+        "tagLine": "Riyadh",
+        "review": "CollabEZ transformed our online presence with a fantastic website. It improved customer engagement and boosted sales. Their support was excellent. Highly recommend their services!"
+      }
+    ]
+  },
+
+  "process": {
+    "header": "From Concepts To Launch",
+    "steps": [
+      {
+        "number": "01",
+        "title": "Discovery",
+        "description": "We start with a detailed discussion to understand your needs, goals, and vision."
+      },
+      {
+        "number": "02",
+        "title": "Research & Planning",
+        "description": "Our team conducts thorough research and creates a comprehensive project plan."
+      },
+      {
+        "number": "03",
+        "title": "Design",
+        "description": "We create intuitive and visually appealing designs tailored to your brand."
+      },
+      {
+        "number": "04",
+        "title": "Development",
+        "description": "Our skilled developers bring the designs to life with clean, efficient code."
+      },
+      {
+        "number": "05",
+        "title": "Testing & Refinement",
+        "description": "Rigorous testing ensures a bug-free, high-performance final product."
+      },
+      {
+        "number": "06",
+        "title": "Launch & Support",
+        "description": "We assist with deployment and provide ongoing support to ensure your success."
+      }
+    ]
+  },
+
+  "contact": {
+    "title": "Let's Discuss Your Ideas",
+    "description": "Share your project details and let's get started.",
+    "labels": {
+      "fullName": "Full Name",
+      "email": "Email",
+      "phone": "Phone",
+      "city": "City",
+      "country": "Country",
+      "company": "Company",
+      "projectType": "Project Type",
+      "projectBudget": "Project Budget",
+      "projectTimeline": "Project Timeline"
+    },
+    "errors": {
+      "required": "{field} is required.",
+      "invalidEmail": "Please enter a valid email address.",
+      "invalidPhone": "Please enter a valid phone number."
+    },
+    "submit": "Submit",
+    "submitting": "Submitting...",
+    "thankYouMessage": "Request submitted. We'll be in touch soon.",
+    "projectTypeOptions": [
+      { "value": "Website Development", "label": "Website Development" },
+      { "value": "Mobile App Development", "label": "Mobile App Development" },
+      { "value": "E-commerce Solutions", "label": "E-commerce Solutions" },
+      { "value": "UI/UX Design", "label": "UI/UX Design" },
+      {
+        "value": "Custom Software Development",
+        "label": "Custom Software Development"
+      },
+      { "value": "Game Development", "label": "Game Development" }
+    ],
+    "projectBudgetOptions": [
+      { "value": "$1,000–$5,000", "label": "$1,000–$5,000" },
+      { "value": "$5,000–$10,000", "label": "$5,000–$10,000" },
+      { "value": "$10,000–$25,000", "label": "$10,000–$25,000" },
+      { "value": "$25,000+", "label": "$25,000+" }
+    ],
+    "projectTimelineOptions": [
+      {
+        "value": "We’re Ready to Start Immediately",
+        "label": "We’re Ready to Start Immediately"
+      },
+      { "value": "Within 1-3 Months", "label": "Within 1-3 Months" },
+      { "value": "Within 3-6 Months", "label": "Within 3-6 Months" }
+    ]
+  },
+
+  "footer": {
+    "currentYear": "© {year} Collabez. All rights reserved.",
+    "description": "Transforming ideas into impactful digital solutions.",
+    "quickLinks": {
+      "title": "Quick Links",
+      "services": "Services",
+      "portfolio": "Portfolio",
+      "whyCollabez": "Why Collabez",
+      "reviews": "Reviews"
+    },
+    "services": {
+      "title": "Services",
+      "webDevelopment": "Web Development",
+      "uiUxDesigner": "UI/UX Designer",
+      "branding": "Branding",
+      "shopify": "Shopify"
+    },
+    "contactUs": {
+      "title": "Contact Us",
+      "email": "hello@collabez.ae",
+      "phone": "+97142206029",
+      "address": "SPC Freezone, Sharjah, UAE"
+    },
+    "policies": {
+      "privacyPolicy": "Privacy Policy",
+      "termsOfService": "Terms of Service",
+      "cookiePolicy": "Cookie Policy"
+    }
+  }
 }

@@ -3,10 +3,37 @@ import React from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
-import { reviewItems } from "@/data";
 import Image from "next/image";
+import { useTranslations } from "next-intl";
+import { usePathname } from "next/navigation";
 
 const Reviews = () => {
+  const t = useTranslations("reviews");
+  const pathname = usePathname();
+  const locale = pathname.split("/")[1];
+
+  const reviewItems = [
+    {
+      avatar: "/avatar1.png",
+      name: t("reviewItems.0.name"),
+      tagLine: t("reviewItems.0.tagLine"),
+      review: t("reviewItems.0.review"),
+    },
+
+    {
+      avatar: "/avatar3.png",
+      name: t("reviewItems.1.name"),
+      tagLine: t("reviewItems.1.tagLine"),
+      review: t("reviewItems.1.review"),
+    },
+    {
+      avatar: "/avatar4.png",
+      name: t("reviewItems.2.name"),
+      tagLine: t("reviewItems.2.tagLine"),
+      review: t("reviewItems.2.review"),
+    },
+  ];
+
   const settings = {
     infinite: true,
     slideToScroll: 1,
@@ -46,16 +73,28 @@ const Reviews = () => {
       <div className="max-w-[93%] w-full mx-auto flex flex-col xl:gap-8 lg:gap-6 gap-6 items-start justify-center h-full">
         <div className="flex flex-col min-[806px]:gap-6 gap-6 items-start justify-between w-full">
           <h3 className="bg-clip-text text-transparent bg-gradient-to-r from-heroColor via-white to-heroColor max-w-7xl min-[1525px]:text-[75px] min-[1420px]:text-[70px]  min-[1260px]:text-[60px] min-[1071px]:text-[50px] min-[976px]:text-[45px] min-[899px]:text-[40px] sm:text-[40px] text-[28px] min-[375px]:text-[32px] min-[414px]:text-[32px] leading-snug font-[family-name:var(--font-satoshi)] text-center mx-auto">
-            Client Reviews
+            {t("clientReviews")}
           </h3>
         </div>
 
         <Slider {...settings} className="w-full relative z-20">
           {reviewItems.map((reviewItem, index) => (
             <div className="mx-auto" key={index}>
-              <div className="bg-reviewCard/40 min-[1426px]:max-w-[460px] xl:max-w-[350px] max-w-full min-[808px]:min-h-[250px] min-[414px]:min-h-[220px] min-h-[300px] backdrop-blur-sm review-border flex flex-col gap-8 p-6 mx-3 cursor-pointer">
-                <div className="flex flex-row justify-between items-center">
-                  <div className="flex flex-row items-center gap-3">
+              <div
+                className={`bg-reviewCard/40 min-[1426px]:max-w-[460px] xl:max-w-[350px] max-w-full min-[808px]:min-h-[250px] min-[414px]:min-h-[220px] min-h-[300px] backdrop-blur-sm review-border flex flex-col ${
+                  locale === "ar" ? "items-end" : "items-start"
+                } gap-8 p-6 mx-3 cursor-pointer`}
+              >
+                <div
+                  className={`flex ${
+                    locale === "ar" ? "flex-row-reverse" : "flex-row"
+                  } justify-between items-center w-full`}
+                >
+                  <div
+                    className={`flex ${
+                      locale === "ar" ? "flex-row-reverse" : "flex-row"
+                    } items-center gap-3`}
+                  >
                     <div>
                       <Image
                         src={reviewItem.avatar}
@@ -65,7 +104,11 @@ const Reviews = () => {
                       />
                     </div>
 
-                    <div className="flex flex-col gap-0.5">
+                    <div
+                      className={`flex flex-col ${
+                        locale === "ar" ? "items-end" : "items-start"
+                      } gap-0.5`}
+                    >
                       <h3 className="font-[family-name:var(--font-satoshi)] text-white text-lg">
                         {reviewItem.name}
                       </h3>
@@ -81,7 +124,11 @@ const Reviews = () => {
                 </div>
 
                 <div>
-                  <p className="font-[family-name:var(--font-satoshi)] text-white text-base min-[808px]:max-w-[370px] max-w-full">
+                  <p
+                    className={`font-[family-name:var(--font-satoshi)] text-white text-base min-[808px]:max-w-[370px] max-w-full ${
+                      locale === "ar" ? "text-right" : "text-left"
+                    }`}
+                  >
                     {reviewItem.review}
                   </p>
                 </div>
